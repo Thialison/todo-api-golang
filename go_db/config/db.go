@@ -11,6 +11,7 @@ import (
 
 var db *gorm.DB
 
+//Connect to database
 func Connect() {
 
 	DBURI := fmt.Sprintf("host=localhost port=5432 user=username dbname=todo sslmode=disable password=pass")
@@ -25,6 +26,7 @@ func Connect() {
 	db = conn
 }
 
+//CloseDatabase is working
 func CloseDatabase(conn *gorm.DB) {
 	conn.Close()
 }
