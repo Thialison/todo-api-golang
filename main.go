@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	"todo-api/models"
-	"todo-api/routes"
+	"todo-api/app/routes"
+	"todo-api/app/todo/models"
 
 	"todo-api/go_db/config"
 
