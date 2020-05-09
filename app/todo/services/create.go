@@ -9,7 +9,7 @@ func (service *TodoService) Create(
 	request *requests.Create,
 ) (*models.Todo, error) {
 
-	todo := models.NewCommission(
+	todo := models.NewTodo(
 		request.Title,
 		request.Body,
 		request.Status,
