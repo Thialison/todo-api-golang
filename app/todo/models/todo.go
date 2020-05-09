@@ -22,7 +22,7 @@ type Todo struct {
 	Status string `gorm:"column:status;not null"`
 }
 
-func NewCommission(
+func NewTodo(
 	title string,
 	body string,
 	status string,
@@ -49,6 +49,13 @@ func (repository *TodoRepo) Create(
 
 	db.NewRecord(todo)
 	return todo, nil
+}
+
+func (repository *TodoRepo) GetAll() ([]Todo, error) {
+	db := config.GetDB()
+	var todos []Todo
+	err := db.Select([]string{"id, title, body, status"}).Find(&todos).Error
+	return todos, err
 }
 
 func CreateTodoTable(db *gorm.DB) error {

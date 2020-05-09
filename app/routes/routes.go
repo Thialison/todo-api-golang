@@ -1,8 +1,6 @@
 package routes
 
 import (
-	"net/http"
-
 	"todo-api/app/todo/controllers"
 	"todo-api/app/todo/models"
 	"todo-api/app/todo/services"
@@ -14,25 +12,11 @@ func Routes(router *gin.Engine) {
 	model := models.NewTodoRepository()
 	service := services.NewTodoService(model)
 	controller := controllers.NewTodoRestController(service)
-	router.GET("/", welcome)
-	// router.GET("/todos", controllers.GetAllTodos)
+	router.GET("/", controller.Welcome)
+	router.GET("/todos", controller.GetAllTodos)
 	router.POST("/todo", controller.Create)
-	// router.GET("/todo/:todoId", controllers.GetSingleTodo)
-	// router.PUT("/todo/:todoId", controllers.EditTodo)
-	// router.DELETE("/todo/:todoId", controllers.DeleteTodo)
-	router.NoRoute(notFound)
-}
-
-func welcome(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Welcome To API",
-	})
-	return
-}
-
-func notFound(c *gin.Context) {
-	c.JSON(http.StatusNotFound, gin.H{
-		"message": "Route Doesn't Exist",
-	})
-	return
+	// router.GET("/todo/:todoId", controller.GetTodo)
+	// router.PUT("/todo/:todoId", controller.EditTodo)
+	// router.DELETE("/todo/:todoId", controller.DeleteTodo)
+	router.NoRoute(controller.NotFound)
 }
