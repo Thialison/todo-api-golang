@@ -6,7 +6,7 @@ import (
 )
 
 func (service *TodoService) Create(
-	request *requests.Create,
+	request requests.Create,
 ) (*models.Todo, error) {
 
 	todo := models.NewTodo(
