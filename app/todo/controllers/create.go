@@ -11,7 +11,7 @@ import (
 func (controller *TodoController) Create(
 	c *gin.Context,
 ) {
-	var request *requests.Create
+	var request requests.Create
 	err := c.ShouldBindJSON(&request)
 
 	if err != nil {
@@ -24,6 +24,7 @@ func (controller *TodoController) Create(
 	response, err := controller.Service.Create(request)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

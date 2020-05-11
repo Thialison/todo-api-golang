@@ -15,7 +15,7 @@ func Routes(router *gin.Engine) {
 	router.GET("/", controller.Welcome)
 	router.GET("/todos", controller.GetAllTodos)
 	router.POST("/todo", controller.Create)
-	// router.GET("/todo/:todoId", controller.GetTodo)
+	router.GET("/todos/:title", controller.GetTodoByTitle)
 	// router.PUT("/todo/:todoId", controller.EditTodo)
 	// router.DELETE("/todo/:todoId", controller.DeleteTodo)
 	router.NoRoute(controller.NotFound)

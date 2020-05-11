@@ -58,6 +58,17 @@ func (repository *TodoRepo) GetAll() ([]Todo, error) {
 	return todos, err
 }
 
+func (repository *TodoRepo) GetTodoByTitle(
+	title string,
+) ([]Todo, error) {
+	db := config.GetDB()
+
+	var todos []Todo
+	err := db.Where("title = ?", title).Find(&todos).Error
+
+	return todos, err
+}
+
 func CreateTodoTable(db *gorm.DB) error {
 	db.DropTableIfExists("todos")
 	db.Debug().AutoMigrate(&Todo{})
