@@ -3,8 +3,6 @@ package main
 import (
 	"log"
 	"todo-api/app/routes"
-	"todo-api/app/todo/models"
-
 	"todo-api/go_db/config"
 
 	"github.com/gin-gonic/gin"
@@ -12,11 +10,10 @@ import (
 
 func main() {
 
-	config.Connect()
-	db := config.GetDB()
-	models.CreateTodoTable(db)
-
+	db := config.Connect()
+	config.CreateTables(db)
 	defer config.CloseDatabase(db)
+
 	router := gin.Default()
 
 	routes.Routes(router)

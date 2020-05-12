@@ -1,13 +1,15 @@
 package services
 
-import "todo-api/app/todo/models"
+import (
+	"todo-api/app/todo/repositories"
+)
 
 type TodoService struct {
-	Repo *models.TodoRepo
+	Repo *repositories.TodoRepo
 }
 
 func NewTodoService(
-	repository *models.TodoRepo,
+	repository *repositories.TodoRepo,
 ) *TodoService {
 	return &TodoService{
 		Repo: repository,

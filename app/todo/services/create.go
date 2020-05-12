@@ -2,6 +2,7 @@ package services
 
 import (
 	"todo-api/app/todo/models"
+	"todo-api/app/todo/repositories"
 	"todo-api/app/todo/views/requests"
 )
 
@@ -9,7 +10,7 @@ func (service *TodoService) Create(
 	request requests.Create,
 ) (*models.Todo, error) {
 
-	todo := models.NewTodo(
+	todo := repositories.NewTodo(
 		request.Title,
 		request.Body,
 		request.Status,
