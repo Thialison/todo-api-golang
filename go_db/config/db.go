@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"todo-api/app/todo/models"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" //postgres
@@ -12,7 +13,7 @@ import (
 var db *gorm.DB
 
 //Connect to database
-func Connect() {
+func Connect() *gorm.DB {
 
 	DBURI := fmt.Sprintf("host=localhost port=5432 user=username dbname=todo sslmode=disable password=pass")
 
@@ -24,6 +25,7 @@ func Connect() {
 
 	log.Printf("Connected to db")
 	db = conn
+	return db
 }
 
 //CloseDatabase is working
@@ -34,4 +36,11 @@ func CloseDatabase(conn *gorm.DB) {
 //GetDB for use in models
 func GetDB() *gorm.DB {
 	return db
+}
+
+func CreateTables(db *gorm.DB) error {
+	db.DropTableIfExists("todos")
+	db.Debug().AutoMigrate(&models.Todo{})
+	log.Printf("Todo table created")
+	return nil
 }

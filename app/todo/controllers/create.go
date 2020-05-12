@@ -21,14 +21,12 @@ func (controller *TodoController) Create(
 
 	fmt.Println(request)
 
-	response, err := controller.Service.Create(request)
+	responseBody, err := controller.Service.Create(request)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": response,
-	})
+	c.JSON(http.StatusOK, gin.H{"response": responseBody})
 	return
 }
